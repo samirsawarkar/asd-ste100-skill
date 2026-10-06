@@ -69,6 +69,14 @@ def test_ste100_linter():
     assert "UNAPPROVED_WORD" in issue_types
     assert "AI_BUZZWORD" in issue_types
 
+    # Test new rules: semicolon, nominalization, phrasal verb
+    rule_violation_text = "Spin up the container; then perform an analysis of the log."
+    v_report = compile_prompt.lint_text(rule_violation_text)
+    v_types = {i["type"] for i in v_report["issues"]}
+    assert "SEMICOLON_BANNED" in v_types
+    assert "PHRASAL_VERB" in v_types
+    assert "NOMINALIZATION" in v_types
+
     # Clean STE procedural sentence: <=20 words, active, approved words
     clean_text = "Make sure that the hydraulic reservoir is full before you start the operation."
     clean_report = compile_prompt.lint_text(clean_text)

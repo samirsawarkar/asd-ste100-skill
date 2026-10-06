@@ -41,13 +41,26 @@ STE_REPLACEMENTS = {
     "close to": "near",
 }
 
-# AI slop buzzwords that degrade technical density
+# AI slop buzzwords & marketing adjectives that degrade technical density
 AI_BUZZWORDS = [
     "delve", "leverage", "tapestry", "seamless", "seamlessly",
     "revolutionize", "testament", "beacon", "cutting-edge",
     "game-changer", "transformative", "crucial", "paramount",
-    "foster", "holistic", "multifaceted", "interplay"
+    "foster", "holistic", "multifaceted", "interplay",
+    "effortless", "effortlessly", "blazing-fast", "world-class",
+    "state-of-the-art"
 ]
+
+# Soft phrasal verbs to avoid in technical documentation (STE Rule 9.3)
+PHRASAL_VERBS = {
+    "spin up": "start",
+    "spun up": "started",
+    "reach out": "contact",
+    "dive into": "read / analyze",
+    "kick off": "begin / start",
+    "circle back": "return",
+    "touch base": "communicate"
+}
 
 
 def build_ste100_prompt(topic: str, softened: bool = True) -> str:
@@ -58,9 +71,13 @@ def build_ste100_prompt(topic: str, softened: bool = True) -> str:
         "- Strict sentence length caps: Procedural sentences <= 20 words; Descriptive sentences <= 25 words.\n"
         "- Active voice and imperative commands for instructions ('Make sure that...', 'Run...', 'Check...').\n"
         "- Simple tenses only (Simple Present, Simple Past, Simple Future, Infinitive). Ban progressive (-ing) and perfect tenses.\n"
+        "- No semicolons (Rule 8.1): STE bans semicolons outright. Split thoughts into separate sentences.\n"
+        "- No nominalizations (Rule 3.7): Use direct verbs ('analyze', not 'perform an analysis of'; 'install', not 'carry out the installation').\n"
+        "- No soft phrasal verbs (Rule 9.3): Use single plain verbs ('start', not 'spin up'; 'read', not 'dive into').\n"
         "- Max 3 words per noun cluster. Never omit articles (the, a, this).\n"
         "- Plain verb replacements: 'make sure' (not 'ensure'), 'before' (not 'prior to'), 'use' (not 'utilize'), 'start' (not 'commence').\n"
-        "- Zero AI filler words (no 'delve', 'leverage', 'tapestry', 'seamless', 'revolutionize').\n"
+        "- Zero marketing adjectives & AI filler (no 'delve', 'leverage', 'tapestry', 'seamless', 'revolutionize', 'blazing-fast').\n"
+        "- Preserve modality: Keep hedges ('may have failed', 'could cause') as hedges. Never upgrade uncertainty into a false certainty.\n"
         "- Maximum 6 sentences per paragraph. One clear topic per paragraph. Use vertical lists for steps."
     )
     if softened:
@@ -165,6 +182,15 @@ def lint_text(text: str) -> Dict:
         word_count = len(words)
         lower_s = clean_s.lower()
 
+        # Check semicolon (STE Rule 8.1 strictly bans semicolons)
+        if ";" in clean_s:
+            issues.append({
+                "sentence_index": idx,
+                "type": "SEMICOLON_BANNED",
+                "message": "STE bans the semicolon (Rule 8.1). Split into separate sentences.",
+                "snippet": clean_s[:80] + "...",
+            })
+
         # Check sentence length (max 25 for descriptive, 20 for procedural)
         if word_count > 25:
             issues.append({
@@ -185,14 +211,36 @@ def lint_text(text: str) -> Dict:
                     "snippet": clean_s[:80] + "...",
                 })
 
-        # Check AI filler buzzwords
+        # Check soft phrasal verbs (Rule 9.3)
+        for phrasal, replacement in PHRASAL_VERBS.items():
+            pattern = r"\b" + re.escape(phrasal) + r"\b"
+            if re.search(pattern, lower_s):
+                issues.append({
+                    "sentence_index": idx,
+                    "type": "PHRASAL_VERB",
+                    "message": f"Soft phrasal verb '{phrasal}' found. Use single plain verb: '{replacement}'.",
+                    "snippet": clean_s[:80] + "...",
+                })
+
+        # Check nominalizations (Rule 3.7)
+        nom_pattern = r"\b(perform|conduct|carry out|carries out|performed|conducted)\s+(?:a|an|the)\s+\w+(?:tion|sion|ment|ance|ence|ysis)\b"
+        nom_match = re.search(nom_pattern, lower_s)
+        if nom_match:
+            issues.append({
+                "sentence_index": idx,
+                "type": "NOMINALIZATION",
+                "message": f"Nominalization '{nom_match.group(0)}' found. Use the direct action verb.",
+                "snippet": clean_s[:80] + "...",
+            })
+
+        # Check AI filler buzzwords & marketing adjectives
         for buzzword in AI_BUZZWORDS:
             pattern = r"\b" + re.escape(buzzword) + r"\b"
             if re.search(pattern, lower_s):
                 issues.append({
                     "sentence_index": idx,
                     "type": "AI_BUZZWORD",
-                    "message": f"AI buzzword '{buzzword}' found. Delete or replace with concrete plain technical term.",
+                    "message": f"Marketing adjective / AI buzzword '{buzzword}' found. Delete or replace with plain fact.",
                     "snippet": clean_s[:80] + "...",
                 })
 

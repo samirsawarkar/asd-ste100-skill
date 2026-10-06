@@ -101,7 +101,12 @@ ASD-STE100 is an aerospace maintenance specification designed to eliminate ambig
 For computer science and software systems:
 - Keep all structural constraints (word caps, active voice, simple tenses, plain verbs, zero AI buzzwords).
 - Permit necessary domain technical nouns (*idempotency*, *backpressure*, *quorums*, *mutex*).
-- **Zero AI Buzzwords**: Strictly ban *delve, leverage, tapestry, seamless, revolutionize, testament, beacon, holistic, game-changer*.
+- **Zero AI Buzzwords**: Strictly ban *delve, leverage, tapestry, seamless, revolutionize, testament, beacon, holistic, game-changer, blazing-fast*.
+- **No Semicolons (Rule 8.1)**: STE strictly bans semicolons. Split compound statements into two sentences.
+- **No Nominalizations (Rule 3.7)**: Use direct verbs ('analyze', not 'perform an analysis of').
+- **No Soft Phrasal Verbs (Rule 9.3)**: Use single plain verbs ('start', not 'spin up'; 'contact', not 'reach out').
+- **Preserve Modality & Hedges**: Never upgrade hedges (*may, could, might, is likely to*) to false certainties. Preserving probabilistic nuance is essential for technical accuracy.
+- **Output Discipline**: Deliver clean, unpadded results. Do not add chatty preamble or self-referential summaries.
 
 ---
 

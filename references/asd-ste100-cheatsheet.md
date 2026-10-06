@@ -94,5 +94,35 @@ Pure ASD-STE100 is designed for aerospace maintenance where a misunderstanding c
   4. **Max 3-word noun clusters**.
   5. **Max 1 instruction per sentence**.
   6. **Max 6 sentences per paragraph**.
-  7. **Zero AI filler words** (*delve, leverage, tapestry, revolutionize, seamlessly, comprehensive, robust*).
+  7. **Zero AI filler words & marketing adjectives** (*delve, leverage, tapestry, revolutionize, seamlessly, comprehensive, robust, blazing-fast*).
   8. **Core plain verb substitutions** (*make sure* instead of *ensure*, *before* instead of *prior to*, *use* instead of *utilize*).
+
+---
+
+## 7. Advanced Structural Heuristics
+
+### A. Total Semicolon Ban (Rule 8.1)
+ASD-STE100 permits standard punctuation marks (period, comma, colon, hyphen, parentheses, quotes), but **strictly bans the semicolon (`;`)**. Semicolons hide compound run-on sentences. Split every semicolon into two distinct sentences.
+
+### B. No Nominalizations (Rule 3.7)
+Do not freeze an action into a noun. Use the direct verb:
+- *Bad*: "Perform an analysis of the logs." $\rightarrow$ *Good*: "Analyze the logs."
+- *Bad*: "Provides assistance to the worker." $\rightarrow$ *Good*: "Helps the worker."
+- *Bad*: "Carry out the installation." $\rightarrow$ *Good*: "Install the software."
+
+### C. No Soft Phrasal Verbs (Rule 9.3)
+Phrasal verbs (verb + preposition) confuse international readers and LLM parsers. Replace with a single unambiguous verb:
+- `spin up` $\rightarrow$ **start**
+- `reach out` $\rightarrow$ **contact**
+- `dive into` $\rightarrow$ **read / inspect**
+- `kick off` $\rightarrow$ **begin**
+- `circle back` $\rightarrow$ **return**
+- `touch base` $\rightarrow$ **communicate**
+
+### D. Modality & Hedge Preservation (Critical Principle)
+**Never upgrade a hedge to a false fact.**
+If the source states: *"The node may have dropped the connection"*, do NOT simplify to *"The node dropped the connection"*.
+Hedges (*may, could, might, is likely to*) convey author confidence and probabilistic reality. Shortening sentences must never sacrifice epistemic accuracy.
+
+### E. No Synonym Rotation
+Never use different words for the same component in the same document. If you call it `primary replica`, never alternate with `master node` or `main instance`. Use one term consistently.

@@ -1,12 +1,12 @@
-# Karpathy Explainer: The Ladder of Understanding for LLMs
+# ASD-STE100 Skill: Simplified Technical English & The Karpathy Ladder
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-brightgreen.svg)](scripts/compile_prompt.py)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-6366f1.svg)](SKILL.md)
 [![OpenAI Codex](https://img.shields.io/badge/OpenAI%20Codex-Compatible-10a37f.svg)](SKILL.md)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/samirsawarkar/karpathy-explainer/pulls)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/samirsawarkar/asd-ste100-skill/pulls)
 
-An open-source Agent Skill and Prompt Compiler for **Claude Code**, **OpenAI Codex**, **ChatGPT**, and modern AI assistants. It transforms standard, vague prompts into **Andrej Karpathy's high-bandwidth understanding artifacts**:
+An open-source Agent Skill and Prompt Compiler for **Claude Code**, **OpenAI Codex**, **ChatGPT**, and modern AI assistants. It implements the international **ASD-STE100 Simplified Technical English** specification and **Andrej Karpathy's Ladder of Understanding**:
 
 1. **Controlled Writing**: ASD-STE100 (and softened 80% ASD-STE100) aerospace maintenance technical English.
 2. **Visual Diagrams**: Mermaid.js and standalone SVG architecture & state flow diagrams.
@@ -86,31 +86,27 @@ For computer science, distributed systems, and modern engineering:
 
 ## Installation
 
-### For Claude Code
-Link the skill into any project repository or global skills folder:
+### Option 1: Quick Install via skills.sh CLI
 ```bash
-# In your project root:
-mkdir -p .claude/skills
-ln -s /path/to/karpathy-explainer .claude/skills/karpathy-explainer
-
-# Or globally for Claude Code:
-ln -s /path/to/karpathy-explainer ~/.claude/skills/karpathy-explainer
+npx skills add samirsawarkar/asd-ste100-skill
 ```
 
-### For OpenAI Codex CLI
+### Option 2: Clone for Claude Code & OpenAI Codex
 ```bash
-# In your project root:
-mkdir -p .codex/skills
-ln -s /path/to/karpathy-explainer .codex/skills/karpathy-explainer
+# Clone to global skills folder
+git clone https://github.com/samirsawarkar/asd-ste100-skill ~/.claude/skills/asd-ste100
 
-# Or globally for Codex:
-ln -s /path/to/karpathy-explainer ~/.codex/skills/karpathy-explainer
+# For OpenAI Codex:
+git clone https://github.com/samirsawarkar/asd-ste100-skill ~/.codex/skills/asd-ste100
 ```
 
-### For Universal Agent Standard (`.agents/skills`)
+### Option 3: Per-Project Symlink
 ```bash
-mkdir -p .agents/skills
-ln -s /path/to/karpathy-explainer .agents/skills/karpathy-explainer
+# In your project root:
+mkdir -p .claude/skills .codex/skills .agents/skills
+ln -s /path/to/asd-ste100-skill .claude/skills/asd-ste100
+ln -s /path/to/asd-ste100-skill .codex/skills/asd-ste100
+ln -s /path/to/asd-ste100-skill .agents/skills/asd-ste100
 ```
 
 ---
@@ -164,7 +160,7 @@ python3 tests/test_compiler.py
 ## Repository Structure
 
 ```
-karpathy-explainer/
+asd-ste100-skill/
 ├── SKILL.md                          # Master Agent Skill specification
 ├── README.md                         # Documentation & reference guide
 ├── LICENSE                           # MIT License

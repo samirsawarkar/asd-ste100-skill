@@ -1,23 +1,24 @@
 ---
-name: karpathy-explainer
+name: asd-ste100
 description: >
-  Converts standard prompts or topics into Andrej Karpathy's high-bandwidth
-  understanding artifacts: ASD-STE100 controlled technical English (or 80% softened STE),
-  structural visual diagrams (Mermaid/SVG), interactive single-file HTML micro-simulators,
+  Comprehensive ASD-STE100 Simplified Technical English (STE) skill and prompt compiler
+  for Claude Code, OpenAI Codex, and LLMs. Repurposes aerospace maintenance controlled
+  English to eliminate ambiguity in agent communications and human comprehension.
+  Implements Andrej Karpathy's Ladder of Understanding: 80% ASD-STE100 prose,
+  structural diagrams (Mermaid/SVG), interactive single-file HTML micro-simulators,
   and bespoke 3Blue1Brown-style explainer video scripts with synced TTS narration.
-  Use when the user asks to "explain", "break down", or "teach" complex architectures or concepts,
-  or explicitly requests "ASD-STE100", "80% STE", "karpathy style", "high-bandwidth output",
-  "convert prompt to karpathy", "interactive explainer", "diagram explainer", or "3b1b video".
+  Use when asked for "ASD-STE100", "STE-100", "simplify English", "controlled language",
+  "karpathy style", "high-bandwidth output", "interactive explainer", or "3b1b video".
 argument-hint: "[ste100|80-ste100|diagram|html|video|all] [topic or prompt]"
 license: MIT
 ---
 
-# Karpathy Explainer: The Ladder of Understanding
+# ASD-STE100 Skill: Simplified Technical English & The Karpathy Ladder
 
 > *"We'll be spending a lot more time trying to understand the outputs of language models... As LLMs get better, they will do more and more of the legwork autonomously, and a lot more of our work will rise up the abstractions into oversight and understanding."*  
 > — **Andrej Karpathy**
 
-Default LLM outputs are linear, verbose, and cognitively expensive. This skill implements Karpathy's hierarchy of high-bandwidth comprehension artifacts to replace walls of conversational AI text with discardable, high-leverage cognitive aids.
+Default LLM outputs are linear, verbose, and cognitively expensive. This skill implements the international ASD-STE100 standard and Karpathy's hierarchy of high-bandwidth comprehension artifacts to replace walls of conversational AI text with unambiguous, discardable, high-leverage cognitive aids.
 
 ---
 
